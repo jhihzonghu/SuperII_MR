@@ -17,7 +17,7 @@ public class StaticReduer extends Reducer<Text,IntWritable,Text, IntWritable> {
 		{
 			sum += AccountEveryRow.get() ; 
 		}
-		System.out.println("PID: \t"+ PID + "TotalPrice: \t"+sum);
+		//System.out.println("PID: \t"+ PID + "TotalPrice: \t"+sum);
 		context.write(PID, new IntWritable(sum));
 		sum = 0 ; 
 	}

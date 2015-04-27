@@ -17,29 +17,32 @@ public class StaticMaper extends Mapper<Object, Text, Text, IntWritable> {
 			throws IOException, InterruptedException {
 		// TODO Auto-generated method stub
 		//super.map(key, value, context);
-	    PIDList = Regexp(value.toString()).replace("plist=", "").split(",");
-		if(PIDList.length%3==0)
+	    PIDList = Regexp(value.toString()).replace("plist=", "").replace(";", "").split(",");
+	    if(PIDList.length%3==0)
 		{
+	    	
+	    	count = 0 ;
 			do{
 			 String PID = PIDList[count];
 		     int TotalPrice = Integer.valueOf(PIDList[count+1])*Integer.valueOf(PIDList[count+2]);
-		     System.out.println("PID:  \t "+PID +"\tTotalPrice:  \t "+TotalPrice);
+		     //System.out.println(PIDList.length);
+		     //System.out.println("PID:  \t "+PID +"\tTotalPrice:  \t "+TotalPrice);
 		     context.write(new Text(PID), new IntWritable(TotalPrice));
-			  count+=3;
-			}while(count>PIDList.length);
+			  count=count+3;
+			}while(count<PIDList.length);
 			count = 0 ;
 		}
 	}
 	private String Regexp(String string) {
 		// TODO Auto-generated method stub
-		String Parser = "plist=[\\d*,]*";
+		String Parser = "plist=[\\d*,]*;";
 		Pattern SoldDataPattern =Pattern.compile(Parser); 
 		Matcher GoodMatcher =SoldDataPattern.matcher(string);
 		if(GoodMatcher.find())
 		{
 			return GoodMatcher.group();
 		}else{
-			return "No Matcher";
+			return "";
 		}
 		
 	}

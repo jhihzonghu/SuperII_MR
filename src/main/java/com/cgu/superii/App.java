@@ -20,6 +20,8 @@ public class App {
 		long StartTime = System.currentTimeMillis();
 		long AverageTime = 0;
 		Configuration conf = new Configuration();
+		conf.set("mapreduce.jobtracker.address", "local");
+		conf.set("fs.defaultFS","file:///");
 		Job job = new Job(conf, "xxxx");
 		job.setJarByClass(App.class);
 		job.setMapperClass(StaticMaper.class);
@@ -31,7 +33,7 @@ public class App {
 		
 		FileInputFormat.setInputPaths(job, 
 				"/opt/hadoop/input2/EHC_1st_round.log");
-		FileOutputFormat.setOutputPath(job, new Path("/opt/hadoop/output2/EHC_1st_round.log"));
+		FileOutputFormat.setOutputPath(job, new Path("/opt/hadoop/output/"));
 		job.waitForCompletion(true);
 		long ProcessTime = System.currentTimeMillis() - StartTime;
 		AverageTime += ProcessTime;
