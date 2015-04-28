@@ -32,8 +32,8 @@ public class App {
 		// TODO: specify input and output DIRECTORIES (not files)
 		
 		FileInputFormat.setInputPaths(job, 
-				"/opt/hadoop/input2/EHC_1st_round.log");
-		FileOutputFormat.setOutputPath(job, new Path("/opt/hadoop/output/"));
+				"/home/jhihzonghu/200.data");
+		FileOutputFormat.setOutputPath(job, new Path("/home/jhihzonghu/output200/"));
 		job.waitForCompletion(true);
 		long ProcessTime = System.currentTimeMillis() - StartTime;
 		AverageTime += ProcessTime;
