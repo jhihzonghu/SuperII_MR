@@ -24,15 +24,11 @@ public class StaticMaper extends Mapper<Object, Text, Text, IntWritable> {
 	    	
 	    	count = 0 ;
 			do{
-			 index +=1;
 			 String PID = PIDList[count];
 		     int TotalPrice = Integer.valueOf(PIDList[count+1])*Integer.valueOf(PIDList[count+2]);
-		     System.out.println(PIDList.length);
-		     System.out.println("PID:  \t "+PID +"\tTotalPrice:  \t "+TotalPrice);
 		     context.write(new Text(PID), new IntWritable(TotalPrice));
 			  count=count+3;
 			}while(count<PIDList.length);
-			System.out.println(index);
 			count = 0 ;
 			
 		}
